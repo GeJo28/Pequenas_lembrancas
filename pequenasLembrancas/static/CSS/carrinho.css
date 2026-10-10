@@ -1,0 +1,760 @@
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #faf9fc;
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#principal {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.cabecalho {
+    position: relative;
+}
+
+.barra-navegacao {
+    background-color: white;
+    padding: 5px 0 10px 0;
+    box-shadow: 3px 3px 2px #ddd;
+}
+
+.logo {
+    width: 43px;
+    height: 43px;
+    margin: 15px 5px 0 170px;
+}
+
+.barra-navegacao p {
+    display: inline-block;
+    position: absolute;
+    color: #6d5482;
+    height: 100%;
+    font-size: 28px;
+    font-weight: 600;
+    font-style: italic;
+    line-height: 32px;
+    margin: 0;
+    padding-top: 20px;
+}
+
+.cabecalho-texto {
+    display: inline-block;
+    position: absolute;
+    left: 700px;
+    height: 100%;
+    margin: 0;
+}
+
+.cabecalho-texto li {
+    list-style-type: none;
+    display: inline-block;
+    padding: 26px 20px 0 0;
+}
+
+.cabecalho-texto li a {
+    font-size: 16px;
+    text-decoration: none;
+    font-weight: 600;
+    color: #4b454d;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.cabecalho-texto li a:hover {
+    border-bottom: solid 2px #6d5482;
+    color: #6d5482;
+}
+
+.carrinho {
+    position: relative;
+    display: inline;
+    color: #6d5482;
+    position: absolute;
+    height: 100%;
+    right: 140px;
+    font-size: 25px;
+    font-weight: bolder;
+    padding-top: 24px;
+}
+
+.quantidade-carrinho {
+    position: absolute;
+    text-decoration: none;
+    border: 1px solid #fed65b;
+    border-radius: 100%;
+    background-color: #fed65b;
+    top: 20px;
+    right: -10px;
+    color: #745c00;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 0 5px 0 5px;
+    font-family: Plus Jakarta Sans;
+}
+
+.conteudo-principal {
+    width: 55%;
+    margin: auto;
+    flex: 1;
+}
+
+.article-texto {
+    margin-top: 50px;
+}
+
+.article-texto h1 {
+    font-family: Playfair Display;
+    font-size: 48px;
+    color: #6d5482;
+    display: inline;
+}
+
+.article-texto p {
+    display: inline-block;
+    margin-left: 110px;
+}
+
+.article-texto a {
+    font-family: Plus Jakarta Sans;
+    font-size: 15px;
+    text-decoration: none;
+    font-weight: 600;
+    color: #6d5482;
+}
+
+.article-texto a:hover {
+    border-bottom: solid 2px #6d5482;
+}
+
+.brigadeiros {
+    margin-top: 40px;
+    background-color: white;
+    border-radius: 20px;
+    padding-bottom: 10px;
+}
+
+.brigadeiros-div {
+    padding: 20px 0 10px 20px;
+}
+
+.img-doces {
+    object-fit: cover;
+    width: 145px;
+    height: 145px;
+    border-radius: 20px;
+    float: left;
+}
+
+.brigadeiros-article {
+    display: block;
+    font-family: Plus Jakarta Sans;
+    position: relative;
+    margin-left: 176px;
+}
+
+.brigadeiros-article h3 {
+    font-family: Playfair Display;
+    font-size: 24px;
+    font-weight: 600;
+    color: #1b1b1e;
+    margin-top: 0;
+}
+
+.icone-delete {
+    color: #6d5482;
+    font-size: 19px;
+    position: absolute;
+    left: 570px;
+    top: 5px;
+    border: solid 0 transparent;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.brigadeiros-article-selecionar {
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: #7c757e;
+}
+
+.brigadeiros-pedidos p {
+    display: inline-block;
+    margin: 0;
+    text-transform: none;
+    color: black;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    background-color: #e9e7eb;
+    border-radius: 20px;
+    padding: 5px 10px 5px 10px;
+    margin-left: 4px;
+}
+
+.contador {
+    padding-right: inherit;
+    margin-top: 20px;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.contador-quantidade {
+    display: inline-flex;
+    font-size: 20px;
+    font-family: Plus Jakarta Sans;
+    color: #7c757e;
+    font-weight: bold;
+    left: 500px;
+    white-space: nowrap;
+    margin-bottom: 0;
+}
+
+.contador-valor {
+    position: absolute;
+    display: inline-flex;
+    font-size: 24px;
+    font-family: Playfair Display;
+    color: #6d5482;
+    font-weight: bold;
+    right: 0;
+    white-space: nowrap;
+    margin-bottom: 0;
+    margin-right: 40px;
+}
+
+.coxinhas {
+    margin-top: 40px;
+    background-color: white;
+    border-radius: 20px;
+    padding-bottom: 10px;
+}
+
+.coxinhas-div {
+    padding: 20px 0 10px 20px;
+}
+
+.icone-delete-coxinha {
+    color: #6d5482;
+    font-size: 19px;
+    position: absolute;
+    left: 570px;
+    top: 5px;
+    border: solid 0 transparent;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.coxinhas-article {
+    display: block;
+    font-family: Plus Jakarta Sans;
+    position: relative;
+    margin-left: 176px;
+}
+
+.coxinhas-article h3 {
+    font-family: Playfair Display;
+    font-size: 24px;
+    font-weight: 600;
+    color: #1b1b1e;
+    margin-top: 0;
+}
+
+.coxinhas-article-p {
+    letter-spacing: 1px;
+    color: #7c757e;
+}
+
+.continuar-pedido {
+    margin-top: 40px;
+    background-color: white;
+    border-radius: 20px;
+    padding: 10px 15px 10px 15px;
+    margin-bottom: 40px;
+    font-family: Playfair Display;
+    font-size: 20px;
+}
+
+.continuar-pedido span {
+    font-size: 24px;
+    font-family: Playfair Display;
+    color: #6d5482;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.continuar-pedido a {
+    text-decoration: none;
+    color: white;
+    font-family: Plus Jakarta Sans;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    transition: color .3s linear;
+    width: 100%;
+    background-color: #735c00;
+    text-align: center;
+    padding: 5px;
+    border-radius: 20px;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+.continuar-pedido a:hover {
+    color: #735c00;
+    background-color: #faf9fc;
+}
+
+.sem-carrinho {
+    font-family: Plus Jakarta Sans;
+}
+
+.rodape {
+    border-top: solid 1px #ccc;
+    padding: 15px 250px 10px 250px;
+    position: relative;
+    background-color: white;
+}
+
+.rodape-div p {
+    display: inline-block;
+    position: absolute;
+    color: #6d5482;
+    font-size: 28px;
+    font-weight: 600;
+    font-style: italic;
+    line-height: 32px;
+    margin: 0;
+    padding-top: 10px;
+    padding-left: 5px;
+}
+
+.texto-rodape p {
+    display: inline-block;
+    position: absolute;
+    left: 700px;
+    bottom: 20px;
+    margin: 0;
+    font-size: 14px;
+    font-family: Plus Jakarta Sans;
+    color: #1b1b1e;
+}
+
+.logo-rodape {
+    width: 43px;
+    height: 43px;
+}
+
+/* =========================================
+   RESPONSIVIDADE — TABLETS E CELULARES
+========================================= */
+
+@media (max-width: 768px) {
+
+    html,
+    body {
+        width: 100%;
+        min-height: 100%;
+        overflow-x: hidden;
+    }
+
+    #principal {
+        width: 100%;
+        min-height: 100vh;
+    }
+
+    .barra-navegacao {
+        padding: 10px 12px;
+        position: relative;
+        box-sizing: border-box;
+    }
+
+    .barra-navegacao>a:first-child {
+        display: inline-flex;
+        align-items: center;
+        max-width: calc(100% - 55px);
+        text-decoration: none;
+    }
+
+    .logo {
+        width: 38px;
+        height: 38px;
+        margin: 0 7px 0 0;
+        flex-shrink: 0;
+    }
+
+    .barra-navegacao p {
+        position: static;
+        display: inline;
+        height: auto;
+        font-size: 20px;
+        line-height: 1.2;
+        padding: 0;
+        overflow-wrap: anywhere;
+    }
+
+    .carrinho {
+        grid-column: 2;
+        grid-row: 1;
+        justify-self: end;
+        align-self: center;
+        font-size: 24px;
+    }
+
+    .quantidade-carrinho {
+        top: -5px;
+        right: -10px;
+    }
+
+    .cabecalho-texto {
+        display: none;
+    }
+
+    .conteudo-principal {
+        width: 90%;
+        max-width: 650px;
+        margin: 0 auto;
+        box-sizing: border-box;
+    }
+
+    .article-texto {
+        margin-top: 30px;
+    }
+
+    .article-texto h1 {
+        font-size: clamp(30px, 5vw, 42px);
+    }
+
+    .article-texto p {
+        margin-left: 12px;
+    }
+
+    .brigadeiros,
+    .coxinhas {
+        box-sizing: border-box;
+        padding: 15px;
+    }
+
+    .brigadeiros-div,
+    .coxinhas-div {
+        padding: 0;
+    }
+
+    .img-doces {
+        width: clamp(75px, 15vw, 110px);
+        height: clamp(75px, 15vw, 110px);
+        margin: 0 12px 10px 0;
+        object-fit: cover;
+    }
+
+    .brigadeiros-article,
+    .coxinhas-article {
+        margin-left: calc(clamp(75px, 15vw, 110px) + 15px);
+        min-width: 0;
+        overflow-wrap: anywhere;
+    }
+
+    .brigadeiros-article h3,
+    .coxinhas-article h3 {
+        font-size: clamp(17px, 2.8vw, 22px);
+        line-height: 1.3;
+        margin-top: 0;
+        margin-right: 25px;
+    }
+
+    .icone-delete,
+    .icone-delete-coxinha {
+        left: auto;
+        right: 0;
+        top: 0;
+    }
+
+    .brigadeiros-pedidos {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+
+    .brigadeiros-pedidos p {
+        margin: 0;
+        font-size: 11px;
+        overflow-wrap: anywhere;
+    }
+
+    .coxinhas-article-p {
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    .contador {
+        clear: both;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 15px;
+    }
+
+    .contador-quantidade,
+    .contador-valor {
+        position: static;
+        display: inline-flex;
+        margin: 0;
+    }
+
+    .contador-quantidade {
+        font-size: 15px;
+        white-space: normal;
+    }
+
+    .contador-valor {
+        font-size: clamp(19px, 3vw, 23px);
+        white-space: nowrap;
+    }
+
+    .continuar-pedido {
+        padding: 12px;
+        box-sizing: border-box;
+    }
+
+    .continuar-pedido a {
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .rodape {
+        padding: 15px 20px;
+        box-sizing: border-box;
+    }
+
+    .rodape-div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .logo-rodape {
+        width: 38px;
+        height: 38px;
+        object-fit: cover;
+    }
+
+    .rodape-div p {
+        position: static;
+        padding: 0;
+        font-size: clamp(18px, 3.5vw, 24px);
+        line-height: 1.3;
+    }
+
+    .texto-rodape p {
+        position: static;
+        margin: 12px 0 0;
+        font-size: 12px;
+        line-height: 1.5;
+        text-align: center;
+        overflow-wrap: anywhere;
+    }
+}
+
+/* =========================================
+   CELULARES PEQUENOS
+========================================= */
+
+@media (max-width: 400px) {
+
+    .conteudo-principal {
+        width: calc(100% - 22px);
+    }
+
+    .barra-navegacao {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .barra-navegacao p {
+        font-size: 17px;
+    }
+
+    .carrinho {
+        right: 14px;
+        font-size: 22px;
+    }
+
+    .cabecalho-texto {
+        gap: 20px;
+    }
+
+    .article-texto h1 {
+        font-size: 29px;
+    }
+
+    .brigadeiros,
+    .coxinhas {
+        padding: 12px;
+    }
+
+    .img-doces {
+        width: 82px;
+        height: 82px;
+        margin-right: 10px;
+    }
+
+    .brigadeiros-article h3,
+    .coxinhas-article h3 {
+        font-size: 18px;
+    }
+
+    .contador-quantidade {
+        font-size: 12px;
+    }
+
+    .contador-valor {
+        font-size: 19px;
+    }
+
+    .rodape-div p {
+        font-size: 17px;
+    }
+}
+
+/* =========================================
+   CABEÇALHO RESPONSIVO — IGUAL AO INDEX
+   ========================================= */
+
+@media (max-width: 1024px) {
+
+    .barra-navegacao {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+        padding: 12px 24px;
+        box-sizing: border-box;
+    }
+
+    .barra-navegacao > a:first-child {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        min-width: 0;
+        text-decoration: none;
+    }
+
+    .logo {
+        width: 40px;
+        height: 40px;
+        margin: 0;
+        flex-shrink: 0;
+    }
+
+    .barra-navegacao p {
+        position: static;
+        height: auto;
+        padding: 0;
+        font-size: 22px;
+        line-height: 1.2;
+    }
+
+    .cabecalho-texto {
+        position: static;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 16px;
+        height: auto;
+        padding: 0;
+        margin: 0;
+    }
+
+    .cabecalho-texto li {
+        padding: 0;
+    }
+
+    .cabecalho-texto li a {
+        font-size: 14px;
+    }
+
+    .carrinho {
+        position: relative;
+        right: auto;
+        height: auto;
+        padding: 0;
+        flex-shrink: 0;
+    }
+
+    .quantidade-carrinho {
+        top: -8px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .barra-navegacao {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 14px 10px;
+        padding: 12px 16px;
+    }
+
+    .barra-navegacao > a:first-child {
+        min-width: 0;
+    }
+
+    .logo {
+        width: 34px;
+        height: 34px;
+        margin: 0;
+    }
+
+    .barra-navegacao p {
+        font-size: clamp(17px, 4.5vw, 22px);
+    }
+
+    .cabecalho-texto {
+        display: none;
+    }
+
+    .carrinho {
+        position: relative;
+        grid-column: 2;
+        grid-row: 1;
+        justify-self: end;
+        align-self: center;
+        right: auto;
+        height: auto;
+        padding: 0;
+        font-size: 24px;
+    }
+
+    .quantidade-carrinho {
+        top: -8px;
+        right: -10px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 380px) {
+
+    .barra-navegacao {
+        padding: 10px 12px;
+    }
+
+    .barra-navegacao p {
+        font-size: 17px;
+    }
+}

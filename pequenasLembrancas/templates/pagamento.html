@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static', filename='CSS/pagamento.css') }}">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='imagens/pagamento/logo.jpeg') }}" type="image/x-icon">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+
+        <title>Pequenas Lembranças</title>
+    </head>
+    <body>
+        
+        <div id="principal">
+
+            <header class="cabecalho">
+                <nav class="barra-navegacao">
+                    <a href="{{ url_for('index') }}">
+                        <img src="{{ url_for('static', filename='imagens/carrinho/logo.jpeg') }}" class="logo" alt="logo pequenas lembranças">
+                        <p>Pequenas Lembranças</p>
+                    </a>
+                    <ul class="cabecalho-texto">
+                        <li><a href="{{ url_for('entrega') }}">Entrega</a></li>
+                        <li><a href="{{ url_for('pagamento') }}">Pagamento</a></li>
+                    </ul>
+                    <a class="carrinho" href="{{ url_for('carrinho') }}"><span><i class="bi bi-cart"></i><span class="quantidade-carrinho">{{ quantidade_carrinho }}</span></span></a>
+                </nav>
+            </header>
+
+            <main class="conteudo-principal">
+                <section class="resumo">
+                    <article class="resumo-article">
+                        <h2>Resumo do Pedido</h2>
+                        <p class="quantidade-itens"><span>{{ quantidade_carrinho }}</span> itens</p>
+
+                        <hr>
+
+                        {% for item in carrinho.itens %}
+                            {% if item.produto.tipo == "brigadeiro" %}
+                                <div class="brigadeiros">
+                                    <img src="{{ url_for('static', filename='imagens/pagamento/caxinha_brigadeiros.jpg') }}" alt="imagem de uma caixinha de brigadeiros">
+                                    <article>
+                                        <p class="caixinha">{{ item.produto.nome }}</p>
+                                        <p class="valor-caixinha">R$ {{ "%.2f"|format(item.produto.preco * item.quantidade)|replace(".", ",") }}</p>
+                                        <div class="brigadeiros-pedidos">
+                                            {% for item_sabor in item.sabores %}
+                                                <p>{{ item_sabor.quantidade }} x {{ item_sabor.sabor.nome }}</p>
+                                            {% endfor %}
+                                        </div>
+                                        {% if item.quantidade > 1 %}
+                                            <p class="unidade">{{ item.quantidade }} - caixinhas</p>
+                                        {% else %}
+                                            <p class="unidade">{{ item.quantidade }} - caixinha</p>
+                                        {% endif %}
+                                    </article>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% for item in carrinho.itens %}
+                            {% if item.produto.tipo == "coxinha" %}
+                                <div class="coxinhas">
+                                    <img src="{{ url_for('static', filename='imagens/pagamento/caxinha_coxinha.jpg') }}" alt="imagem de uma caixinha de coxinha">
+                                    <article>
+                                        <p class="caixinha">{{ item.produto.nome }}</p>
+                                        <p class="valor-caixinha">R$ {{ "%.2f"|format(item.produto.preco * item.quantidade)|replace(".", ",") }}</p>
+                                        {% if item.quantidade > 1 %}
+                                            <p class="unidade">{{ item.quantidade }} - caixinhas</p>
+                                        {% else %}
+                                            <p class="unidade">{{ item.quantidade }} - caixinha</p>
+                                        {% endif %}
+                                    </article>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+
+                        <hr>
+
+                        <div class="subtotal">
+                            <p class="texto-subtotal">Subtotal</p>
+                            <p class="valor-subtotal">R$ {{ "%.2f"|format(total)|replace(".", ",") }}</p>
+                            <br>
+                            <p class="texto-entrega">Taxa de entrega</p>
+                            <p class="valor-entrega">R$ 0,00</p>
+                        </div>
+
+                        <hr>
+
+                        <div class="total">
+                            <p class="texto-total">Total</p>
+                            <p class="valor-total">R$ {{ "%.2f"|format(total)|replace(".", ",") }}</p>
+                        </div>
+                    </article>
+                </section>
+
+                <article class="texto-article">
+                    <h1>Pagamento</h1>
+                    <p>Escolha como deseja concluir seu pedido.</p>
+                </article>
+
+                <form action="" method="POST" class="forma-pagamento">
+                    <fieldset>
+                        <label class="metodo-pagamento">
+                            <input type="radio" name="pagamento" value="pix" required>
+                            <span class="icone-pagamento"><i class="bi bi-qr-code"></i></span>
+                            <span class="texto-pagamento">PIX</span>
+                        </label>
+
+                        <label class="metodo-pagamento">
+                            <input type="radio" name="pagamento" value="credito" required>
+                            <span class="icone-pagamento"><i class="bi bi-credit-card"></i></span>
+                            <span class="texto-pagamento">Cartão de Crédito</span>
+                        </label>
+
+                        <label class="metodo-pagamento">
+                            <input type="radio" name="pagamento" value="debito" required>
+                            <span class="icone-pagamento"><i class="bi bi-credit-card"></i></span>
+                            <span class="texto-pagamento">Cartão de Débito</span>
+                        </label>
+
+                        <label class="metodo-pagamento">
+                            <input type="radio" name="pagamento" value="dinheiro" required>
+                            <span class="icone-pagamento"><i class="bi bi-cash"></i></span>
+                            <span class="texto-pagamento">Dinheiro</span>
+                        </label>
+
+                        <br>
+
+                        <div class="troco-div">
+                            <label for="troco" class="troco">Troco:</label>
+
+                            <input type="text" id="troco" class="troco-input" inputmode="numeric" placeholder="R$ 0,00" autocomplete="off">
+
+                            <input type="hidden" name="troco" id="troco-valor">
+                        </div>
+
+                        <button type="submit">
+                            <i class="bi bi-bag-check"></i>
+                            Confimar Pagamento
+                        </button>
+                    </fieldset>
+                </form>
+            </main>
+
+            <footer class="rodape">
+                <div class="rodape-div">
+                    <img src="{{ url_for('static', filename='imagens/carrinho/logo.jpeg') }}" class="logo-rodape" alt="logo pequenas lembranças">
+                    <p>Pequenas Lembranças</p>
+                </div>
+
+                <div class="texto-rodape">
+                    <p>&copy; 2026 Pequenas Lembranças. Feito com carinho para momentos especiais.</p>
+                </div>
+            </footer>
+
+        </div>
+
+        <script src="{{ url_for('static', filename='script/pagamento.js') }}"></script>
+        <script src="{{ url_for('static', filename='script/pagamento_troco.js') }}"></script>
+    </body>
+</html>

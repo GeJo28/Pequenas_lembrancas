@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static', filename='CSS/entrega.css') }}">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='imagens/entrega/logo.jpeg') }}" type="image/x-icon">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+
+        <title>Pequenas Lembranças</title>
+    </head>
+    <body>
+        
+        <div id="principal">
+
+            <header class="cabecalho">
+                <nav class="barra-navegacao">
+                    <a href="{{ url_for('index') }}">
+                        <img src="{{ url_for('static', filename='imagens/carrinho/logo.jpeg') }}" class="logo" alt="logo pequenas lembranças">
+                        <p>Pequenas Lembranças</p>
+                    </a>
+                    <ul class="cabecalho-texto">
+                        <li><a href="{{ url_for('entrega') }}">Entrega</a></li>
+                        <li><a href="{{ url_for('pagamento') }}">Pagamento</a></li>
+                    </ul>
+                    <a class="carrinho" href="{{ url_for('carrinho') }}"><span><i class="bi bi-cart"></i><span class="quantidade-carrinho">{{ quantidade_carrinho }}</span></span></a>
+                </nav>
+            </header>
+
+            <main class="conteudo-principal">
+                <form action="" method="POST" class="form-entrega" id="form-entrega">
+                    {{ form_entrega.csrf_token }}
+                    <fieldset>
+                        <legend><i class="bi bi-geo-alt"></i>Endereço de Destino</legend>
+                        <p>Etapa Obrigatória</p>
+
+                        <div class="div-entrega">
+                            <div class="rua">
+                                <label for="rua">Rua/Logradouro<span class="obrigatorio">*</span></label>
+                                {% if form_entrega.rua_logradouro(id="rua").errors %}
+                                    {{ form_entrega.rua_logradouro(id="rua") }}
+                                    {% for erro in form_entrega.rua_logradouro(id="rua").errors %}
+                                        {{ erro }}
+                                    {% endfor %}
+                                {% else %}
+                                    {{ form_entrega.rua_logradouro(id="rua") }}
+                                {% endif %}
+                            </div>
+
+                            <div class="numero">
+                                <label for="numero">Número<span class="obrigatorio">*</span></label>
+                                {% if form_entrega.numero(id="numero").errors %}
+                                    {{ form_entrega.numero(id="numero") }}
+                                    {% for erro in form_entrega.numero(id="numero").errors %}
+                                        {{ erro }}
+                                    {% endfor %}
+                                {% else %}
+                                    {{ form_entrega.numero(id="numero") }}
+                                {% endif %}
+                            </div>
+
+                            <div class="complemento">
+                                <label for="complemento">Complemento<span class="opcional">(Opcional)</span></label>
+                                {% if form_entrega.complemento(id="complemento").errors %}
+                                    {{ form_entrega.complemento(id="complemento") }}
+                                    {% for erro in form_entrega.complemento(id="complemento").errors %}
+                                        {{ erro }}
+                                    {% endfor %}
+                                {% else %}
+                                    {{ form_entrega.complemento(id="complemento") }}
+                                {% endif %}
+                            </div>
+
+                            <div class="bairro">
+                                <label for="bairro">Bairro<span class="obrigatorio">*</span></label>
+                                {% if form_entrega.bairro(id="bairro").errors %}
+                                    {{ form_entrega.bairro(id="bairro") }}
+                                    {% for erro in form_entrega.bairro(id="bairro").errors %}
+                                        {{ erro }}
+                                    {% endfor %}
+                                {% else %}
+                                    {{ form_entrega.bairro(id="bairro") }}
+                                {% endif %}
+                            </div>
+
+                            <div class="nome">
+                                <label for="nome">Nome de quem vai receber<span class="obrigatorio">*</span></label>
+                                {% if form_entrega.nome(id="nome").errors %}
+                                    {{ form_entrega.nome(id="nome") }}
+                                    {% for erro in form_entrega.nome(id="nome").errors %}
+                                        {{ erro }}
+                                    {% endfor %}
+                                {% else %}
+                                    {{ form_entrega.nome(id="nome") }}
+                                {% endif %}
+                            </div>
+
+                            <div class="celular">
+                                <label for="celular">Whatsapp/Telefone para aviso<span class="obrigatorio">*</span></label>
+                                {% if form_entrega.celular(id="celular").errors %}
+                                    {{ form_entrega.celular(id="celular") }}
+                                    {% for erro in form_entrega.celular(id="celular").errors %}
+                                        {{ erro }}
+                                    {% endfor %}
+                                {% else %}
+                                    {{ form_entrega.celular(id="celular") }}
+                                {% endif %}
+                            </div>
+
+                            <div class="referencia">
+                                <label for="referencia">Ponto de referência<span class="opcional">(Opcional)</span></label>
+                                {% if form_entrega.referencia(id="referencia").errors %}
+                                    {{ form_entrega.referencia(id="referencia") }}
+                                    {% for erro in form_entrega.referencia(id="referencia").errors %}
+                                        {{ erro }}
+                                    {% endfor %}
+                                {% else %}
+                                    {{ form_entrega.referencia(id="referencia") }}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </fieldset>
+                    {{ form_entrega.botao_submit_entrega(class="btn") }}
+                </form>
+            </main>
+
+            <footer class="rodape">
+                <div class="rodape-div">
+                    <img src="{{ url_for('static', filename='imagens/carrinho/logo.jpeg') }}" class="logo-rodape" alt="logo pequenas lembranças">
+                    <p>Pequenas Lembranças</p>
+                </div>
+
+                <div class="texto-rodape">
+                    <p>&copy; 2026 Pequenas Lembranças. Feito com carinho para momentos especiais.</p>
+                </div>
+            </footer>
+        </div>
+
+        <script src="{{ url_for('static', filename='script/entrega.js') }}"></script>
+    </body>
+</html>

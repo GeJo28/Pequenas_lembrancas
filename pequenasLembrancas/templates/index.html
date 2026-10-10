@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static', filename='CSS/estilo.css') }}">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='imagens/logo.jpeg') }}" type="image/x-icon">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+
+        <title>Pequenas Lembranças</title>
+    </head>
+    <body>
+
+        <div id="principal">
+
+            <header class="cabecalho">
+                <nav class="barra-navegacao">
+                    <a href="{{ url_for('index') }}">
+                        <img src="{{ url_for('static', filename='imagens/index/logo.jpeg') }}" class="logo" alt="logo pequenas lembranças">
+                        <p>Pequenas Lembranças</p>
+                    </a>
+                    <ul class="cabecalho-texto">
+                        <li><a href="#doces">Brigadeiros</a></li>
+                        <li><a href="#coxinha">Coxinhas de Morango</a></li>
+                    </ul>
+                    <a class="carrinho" href="{{ url_for('carrinho') }}"><span><i class="bi bi-cart"></i><span class="quantidade-carrinho">{{ quantidade_carrinho }}</span></span></a>
+                </nav>
+            </header>
+
+            <main class="conteudo-principal">
+                <section class="apresentacao">
+                    <article class="apresentacao-article">
+                        <h1>Momentos doces em cada <br> caixinha</h1>
+                        <p>Delicadeza artesanal para presentear quem você ama, ou para <br> adoçar o seu dia.</p>
+                        <a href="#doces">Fazer Pedido</a>
+                    </article>
+                </section>
+
+                <div id="doces">
+                    <section id="brigadeiros">
+                        <div class="brigadeiro-div">
+                            <img src="{{ url_for('static', filename='imagens/index/caxinha_brigadeiros.jpg') }}" alt="imagem da caixinha de brigadeiros">
+
+                            <article class="brigadeiro-article">
+                                <p class="especialidade">Especialidade</p>
+                                <h2>{{ produto_brigadeiro.nome }}</h2>
+                                <p class="texto-brigadeiro">{{ produto_brigadeiro.descricao }}</p>
+                                <p class="valor-brigadeiro"><span>R$ {{ "%.2f"|format(produto_brigadeiro.preco)|replace(".", ",") }}</span></p>
+                                <button type="button" id="abrir-modal">Adicionar</button>
+                            </article>
+                        </div>
+                    </section>
+
+                    <div id="modal" class="modal">
+                        <div class="modal-conteudo">
+                            <form action="" method="POST">
+                                {{ form_carrinho_brigadeiro.csrf_token }}
+                                {% for sabor in sabores %}
+                                    <label>
+                                        <input type="checkbox" name="sabores" value="{{ sabor.id }}" class="checkbox-sabor">
+                                        <div class="brigadeiros-div">
+                                            <img src="{{ url_for('static', filename=sabor.imagem) }}" alt="imagem do brigadeiro {{ sabor.nome }}">      
+                                            <div class="sombra"></div>
+                                            <p>{{ sabor.nome }}</p>
+                                            <div class="contador-addremove-sabores">
+                                                <button type="button" class="btn-menos"><i class="bi bi-dash"></i></button>
+                                                <input type="number" name="quantidade_{{ sabor.id }}" class="quantidade-sabores" value="0" readonly>
+                                                <button type="button" class="btn-mais"><i class="bi bi-plus"></i></button>
+                                            </div>
+                                        </div>
+                                    </label>
+                                {% endfor %}
+                                <div class="adicionar-quantidade">
+                                    <div class="contador-addremove">
+                                        <button type="button"><i class="bi bi-dash"></i></button>
+                                        {{ form_carrinho_brigadeiro.quantidade(id="quantidade", value="0") }}
+                                        <button type="button"><i class="bi bi-plus"></i></button>
+                                    </div>
+                                    {{ form_carrinho_brigadeiro.botao_submit_brigadeiro(disabled=True, id="botao-adicionar", class="button-adicionar") }}
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <section id="coxinha">
+                        <div class="coxinha-div">
+                            <img src="{{ url_for('static', filename='imagens/index/coxinha_doce.jpg') }}" alt="imagem da coxinha doce de morango">
+
+                            <article class="coxinha-article">
+                                <p class="especialidade">Especialidade</p>
+                                <h2>{{ produto_coxinha.nome }}</h2>
+                                <p class="texto-coxinha">{{ produto_coxinha.descricao }}</p>
+                                <p class="valor-coxinha"><span>R$ {{ "%.2f"|format(produto_coxinha.preco)|replace(".", ",") }}</span> /2 unidades</p>
+                                <form action="" method="POST">
+                                    {{ form_carrinho_coxinha.csrf_token }}
+
+                                    {{ form_carrinho_coxinha.produto_id(value=produto_coxinha.id) }}
+                                    <div class="adicionar-quantidade">
+                                        <div class="contador-addremove">
+                                            <button class="btn-menos-coxinha" type="button"><i class="bi bi-dash"></i></button>
+                                            {{ form_carrinho_coxinha.quantidade(id="quantidade-coxinha", value="0") }}
+                                            <button class="btn-mais-coxinha" type="button"><i class="bi bi-plus"></i></button>
+                                        </div>
+                                        {{ form_carrinho_coxinha.botao_submit_coxinha(class="botao-coxinha") }}
+                                    </div>
+                                </form>
+                            </article>
+                        </div>
+                    </section>
+                </div>
+            </main>
+
+            <footer class="rodape">
+                <div class="rodape-div">
+                    <img src="{{ url_for('static', filename='imagens/index/logo.jpeg') }}" class="logo-rodape" alt="logo pequenas lembranças">
+                    <p>Pequenas Lembranças</p>
+                </div>
+
+                <div class="texto-rodape">
+                    <p>&copy; 2026 Pequenas Lembranças. Feito com carinho para momentos especiais.</p>
+                </div>
+            </footer>
+        </div>
+       
+        <script src="{{ url_for('static', filename='script/index.js') }}"></script>
+        <script src="{{ url_for('static', filename='script/index_quantidade.js') }}"></script>
+        <script src="{{ url_for('static', filename='script/index_botaoadicionar.js') }}"></script>
+        <script src="{{ url_for('static', filename='script/index_quantidadesabor.js') }}"></script>
+        <script src="{{ url_for('static', filename='script/index_quantidadecoxinha.js') }}"></script>
+    </body>
+</html>
