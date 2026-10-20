@@ -540,6 +540,13 @@ label:has(.checkbox-sabor:checked) .brigadeiros-div {
     cursor: pointer;
 }
 
+.msg-whatsapp{
+    position: fixed;
+    display: inline-block;
+    right: 20px;
+    bottom: 20px;
+}
+
 .rodape {
     border-top: solid 1px #ccc;
     padding: 15px 250px 10px 250px;

@@ -266,7 +266,7 @@ def pagamento():
 
         mensagem = montar_mensagem_pedido(carrinho, forma_pagamento, troco, total)
 
-        numero = '5511942436768' 
+        numero = '5511999996841' 
 
         link_whatsapp = f"https://wa.me/{numero}?text={quote(mensagem)}" 
 
