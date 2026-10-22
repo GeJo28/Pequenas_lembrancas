@@ -55,10 +55,8 @@
                     <div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-titulo" aria-describedby="modal-instrucao" aria-hidden="true">
                         <div class="modal-conteudo">
                             <div class="modal-cabecalho">
-                                <div>
-                                    <h2 id="modal-titulo" tabindex="-1">Monte sua caixinha</h2>
-                                    <p id="modal-instrucao">Escolha 4 brigadeiros para compor sua caixinha.</p>
-                                </div>
+                                <h2 id="modal-titulo" class="visualmente-oculto" tabindex="-1">Escolha os sabores</h2>
+                                <p id="modal-instrucao" class="visualmente-oculto">Monte sua caixinha com 4 brigadeiros.</p>
                                 <button type="button" id="fechar-modal" class="fechar-modal" aria-label="Fechar seleção de sabores">
                                     <i class="bi bi-x-lg" aria-hidden="true"></i>
                                 </button>
@@ -70,7 +68,6 @@
                                         <input type="checkbox" name="sabores" value="{{ sabor.id }}" class="checkbox-sabor" id="sabor-{{ sabor.id }}">
                                         <label for="sabor-{{ sabor.id }}" class="brigadeiros-div">
                                             <img src="{{ url_for('static', filename=sabor.imagem) }}" alt="">
-                                            <div class="sombra" aria-hidden="true"></div>
                                             <p>{{ sabor.nome }}</p>
                                         </label>
                                         <div class="contador-addremove-sabores">
