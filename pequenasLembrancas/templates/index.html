@@ -47,29 +47,38 @@
                                 <h2>{{ produto_brigadeiro.nome }}</h2>
                                 <p class="texto-brigadeiro">{{ produto_brigadeiro.descricao }}</p>
                                 <p class="valor-brigadeiro"><span>R$ {{ "%.2f"|format(produto_brigadeiro.preco)|replace(".", ",") }}</span></p>
-                                <button type="button" id="abrir-modal">Adicionar</button>
+                                <button type="button" id="abrir-modal" aria-haspopup="dialog" aria-controls="modal">Adicionar</button>
                             </article>
                         </div>
                     </section>
 
-                    <div id="modal" class="modal">
+                    <div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-titulo" aria-describedby="modal-instrucao" aria-hidden="true">
                         <div class="modal-conteudo">
+                            <div class="modal-cabecalho">
+                                <div>
+                                    <h2 id="modal-titulo" tabindex="-1">Monte sua caixinha</h2>
+                                    <p id="modal-instrucao">Escolha 4 brigadeiros para compor sua caixinha.</p>
+                                </div>
+                                <button type="button" id="fechar-modal" class="fechar-modal" aria-label="Fechar seleção de sabores">
+                                    <i class="bi bi-x-lg" aria-hidden="true"></i>
+                                </button>
+                            </div>
                             <form action="" method="POST">
                                 {{ form_carrinho_brigadeiro.csrf_token }}
                                 {% for sabor in sabores %}
-                                    <label>
-                                        <input type="checkbox" name="sabores" value="{{ sabor.id }}" class="checkbox-sabor">
-                                        <div class="brigadeiros-div">
-                                            <img src="{{ url_for('static', filename=sabor.imagem) }}" alt="imagem do brigadeiro {{ sabor.nome }}">      
-                                            <div class="sombra"></div>
+                                    <div class="sabor-opcao">
+                                        <input type="checkbox" name="sabores" value="{{ sabor.id }}" class="checkbox-sabor" id="sabor-{{ sabor.id }}">
+                                        <label for="sabor-{{ sabor.id }}" class="brigadeiros-div">
+                                            <img src="{{ url_for('static', filename=sabor.imagem) }}" alt="">
+                                            <div class="sombra" aria-hidden="true"></div>
                                             <p>{{ sabor.nome }}</p>
-                                            <div class="contador-addremove-sabores">
-                                                <button type="button" class="btn-menos"><i class="bi bi-dash"></i></button>
-                                                <input type="number" name="quantidade_{{ sabor.id }}" class="quantidade-sabores" value="0" readonly>
-                                                <button type="button" class="btn-mais"><i class="bi bi-plus"></i></button>
-                                            </div>
+                                        </label>
+                                        <div class="contador-addremove-sabores">
+                                            <button type="button" class="btn-menos" aria-label="Diminuir quantidade de {{ sabor.nome }}"><i class="bi bi-dash" aria-hidden="true"></i></button>
+                                            <input type="number" name="quantidade_{{ sabor.id }}" class="quantidade-sabores" value="0" readonly aria-label="Quantidade de {{ sabor.nome }}">
+                                            <button type="button" class="btn-mais" aria-label="Aumentar quantidade de {{ sabor.nome }}"><i class="bi bi-plus" aria-hidden="true"></i></button>
                                         </div>
-                                    </label>
+                                    </div>
                                 {% endfor %}
                                 <div class="adicionar-quantidade">
                                     <div class="contador-addremove">

@@ -357,14 +357,29 @@ body {
 .troco-input {
     display: inline-block;
     box-sizing: border-box;
-    width: 85%;
-    height: 35px;
+    width: 100%;
+    max-width: 320px;
+    height: 42px;
+    margin-top: 8px;
+    padding: 8px 12px;
     border: solid 1px #f5f3f7;
     border-radius: 8px;
     background-color: #f5f3f7;
     box-shadow: 2px 2px 2px #ccc;
-    outline: none;
-    font-family: Plus Jakarta Sans;
+    font: 14px Plus Jakarta Sans, sans-serif;
+}
+
+.troco-input:focus-visible {
+    border-color: #6d5482;
+    outline: 2px solid #e9dff2;
+    outline-offset: 1px;
+}
+
+#troco-ajuda {
+    display: block;
+    margin-top: 6px;
+    color: #6b6470;
+    font: 12px/1.5 Plus Jakarta Sans, sans-serif;
 }
 
 .troco-input::-webkit-inner-spin-button,

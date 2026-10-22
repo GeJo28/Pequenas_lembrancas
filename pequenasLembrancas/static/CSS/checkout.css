@@ -1,0 +1,90 @@
+.progresso-pedido {
+    margin: 30px 0 24px;
+    font-family: Plus Jakarta Sans, sans-serif;
+}
+
+.progresso-pedido ol {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.etapa-pedido {
+    position: relative;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.etapa-pedido:not(:last-child)::after {
+    position: absolute;
+    top: 16px;
+    left: calc(50% + 18px);
+    width: calc(100% - 36px);
+    height: 2px;
+    background-color: #e9e7eb;
+    content: "";
+}
+
+.etapa-pedido.etapa-concluida:not(:last-child)::after {
+    background-color: #6d5482;
+}
+
+.etapa-pedido > a {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    color: inherit;
+    text-decoration: none;
+}
+
+.etapa-numero {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    width: 34px;
+    height: 34px;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #d8d3dc;
+    border-radius: 50%;
+    background-color: #faf9fc;
+    color: #6b6470;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.etapa-nome {
+    color: #6b6470;
+    font-size: 13px;
+}
+
+.etapa-atual .etapa-numero,
+.etapa-concluida .etapa-numero {
+    border-color: #6d5482;
+    background-color: #6d5482;
+    color: white;
+}
+
+.etapa-atual .etapa-nome {
+    color: #4b345d;
+    font-weight: 700;
+}
+
+.etapa-concluida .etapa-nome {
+    color: #4b345d;
+    font-weight: 600;
+}
+
+.etapa-concluida > a:focus-visible {
+    border-radius: 6px;
+    outline: 2px solid #6d5482;
+    outline-offset: 4px;
+}

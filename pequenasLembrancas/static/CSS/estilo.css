@@ -276,9 +276,9 @@ body {
 
 .modal-conteudo {
     background-color: white;
-    padding: 30px;
+    padding: 28px;
     border-radius: 20px;
-    width: 420px;
+    width: min(480px, 100%);
     text-align: left;
     position: relative;
     z-index: 10000;
@@ -294,30 +294,127 @@ body {
     text-align: left;
 }
 
-.checkbox-sabor {
-    display: none;
+.modal-cabecalho {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 18px;
 }
 
-label:has(.checkbox-sabor:checked) .brigadeiros-div {
+.modal-cabecalho h2 {
+    margin: 0;
+    color: #1b1b1e;
+    font-family: Playfair Display, serif;
+    font-size: 26px;
+    line-height: 1.2;
+}
+
+.modal-cabecalho p {
+    margin: 6px 0 0;
+    color: #6b6470;
+    font-family: Plus Jakarta Sans, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.fechar-modal {
+    display: inline-flex;
+    position: static;
+    width: 36px;
+    height: 36px;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: #6d5482;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.fechar-modal:hover {
     background-color: #f5f3f7;
 }
 
-.brigadeiros-div {
+.fechar-modal:focus-visible,
+.modal :focus-visible {
+    outline: 3px solid #9a7bb4;
+    outline-offset: 3px;
+}
+
+.checkbox-sabor {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+.sabor-opcao {
     position: relative;
-    border-bottom: 1px solid #ccc;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+    padding: 8px 10px;
+    border: 1px solid #eeeaf1;
+    border-radius: 14px;
+    background-color: #fff;
+    transition: background-color .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+
+.sabor-opcao:has(.checkbox-sabor:checked) {
+    border-color: #b9a5c9;
+    background-color: #faf7fc;
+    box-shadow: 0 3px 10px rgba(109, 84, 130, .1);
+}
+
+.sabor-opcao:hover {
+    border-color: #d8c9e3;
+}
+
+.checkbox-sabor:focus-visible + .brigadeiros-div {
+    outline: 3px solid #9a7bb4;
+    outline-offset: 3px;
+    border-radius: 8px;
+}
+
+.modal .brigadeiros-div {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: 12px;
+    padding: 0;
     cursor: pointer;
 }
 
-.brigadeiros-div:first-child {
-    border-top: 1px solid #ccc;
-    color: red;
+.modal .brigadeiros-div img {
+    display: block;
+    float: none;
+    width: 52px;
+    height: 52px;
+    flex: 0 0 auto;
+    border-radius: 12px;
+    object-fit: cover;
+    box-shadow: 0 2px 5px rgba(27, 27, 30, .12);
 }
 
-.brigadeiros-div img {
-    float: left;
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
+.modal .brigadeiros-div p {
+    display: block;
+    min-width: 0;
+    margin: 0;
+    color: #302b38;
+    font-family: Plus Jakarta Sans, sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.35;
+    text-decoration: none;
+    overflow-wrap: anywhere;
 }
 
 .sombra {
@@ -339,29 +436,53 @@ label:has(.checkbox-sabor:checked) .brigadeiros-div {
     z-index: 1;
 }
 
-.contador-addremove-sabores {
-    position: absolute;
-    right: 0;
-    top: 10px;
+.modal .sombra {
     display: none;
-    background-color: #e9e7eb;
-    padding: 5px;
-    border-radius: 20px;
+}
+
+.contador-addremove-sabores {
+    position: static;
+    display: none;
+    align-items: center;
+    gap: 4px;
+    padding: 4px;
+    border: 1px solid #e9e4ed;
+    border-radius: 999px;
+    background-color: #f5f3f7;
 }
 
 .contador-addremove-sabores button {
-    border-radius: 100%;
+    display: inline-flex;
+    width: 32px;
+    height: 32px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid transparent;
+    border-radius: 50%;
     background-color: white;
-    border: solid 0 transparent;
-    font-size: 20px;
-    font-weight: 800;
+    color: #6d5482;
+    font-size: 17px;
+    font-weight: 700;
     cursor: pointer;
+}
+
+.contador-addremove-sabores button:hover:not(:disabled) {
+    border-color: #d8c9e3;
+    background-color: #fdfbff;
+}
+
+.contador-addremove-sabores button:disabled {
+    color: #a9a3ad;
+    cursor: not-allowed;
 }
 
 .quantidade-sabores {
     margin: 0;
     padding: 0;
-    font-size: 18px;
+    color: #302b38;
+    font-family: Plus Jakarta Sans, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
     box-sizing: border-box;
     border: none;
     width: 20px;
@@ -386,6 +507,33 @@ label:has(.checkbox-sabor:checked) .brigadeiros-div {
 .adicionar-quantidade {
     margin-top: 10px;
     position: relative;
+}
+
+.modal .adicionar-quantidade {
+    position: sticky;
+    bottom: -28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 14px -28px -28px;
+    padding: 14px 28px 20px;
+    border-top: 1px solid #eeeaf1;
+    background-color: white;
+}
+
+.modal .button-adicionar {
+    position: static;
+    margin-left: auto;
+    padding: 12px 22px;
+    background-color: #6d5482;
+    color: white;
+    font-weight: 700;
+}
+
+.modal .button-adicionar:hover:not(:disabled) {
+    background-color: #59416d;
+    color: white;
 }
 
 .button-adicionar {
@@ -449,7 +597,11 @@ label:has(.checkbox-sabor:checked) .brigadeiros-div {
 }
 
 #fechar-modal {
-    display: none;
+    display: inline-flex;
+}
+
+body.modal-aberto {
+    overflow: hidden;
 }
 
 #coxinha {
@@ -1000,11 +1152,41 @@ img {
         max-width: 430px;
         max-height: 90vh;
         max-height: 90dvh;
-        padding: 18px;
+        padding: 20px 16px 18px;
         border-radius: 16px;
         overflow-x: hidden;
         overflow-y: auto;
         overscroll-behavior: contain;
+    }
+
+    .modal-cabecalho h2 {
+        font-size: 22px;
+    }
+
+    .modal-cabecalho p {
+        max-width: 260px;
+        font-size: 13px;
+    }
+
+    .sabor-opcao {
+        gap: 8px;
+        margin-bottom: 8px;
+        padding: 8px;
+        border-radius: 12px;
+    }
+
+    .modal .brigadeiros-div {
+        min-height: 48px;
+        gap: 9px;
+    }
+
+    .modal .brigadeiros-div img {
+        width: 44px;
+        height: 44px;
+    }
+
+    .modal .brigadeiros-div p {
+        font-size: 13px;
     }
 
     .brigadeiros-div {
@@ -1036,10 +1218,8 @@ img {
     }
 
     .contador-addremove-sabores {
-        top: 50%;
-        right: 0;
-        transform: translateY(-50%);
         padding: 3px;
+        transform: none;
     }
 
     .contador-addremove-sabores button {
@@ -1052,9 +1232,15 @@ img {
     }
 
     .modal .adicionar-quantidade {
-        padding-top: 12px;
-        padding-bottom: 4px;
+        bottom: -18px;
+        margin: 12px -16px -18px;
+        padding: 12px 16px 16px;
         background-color: white;
+    }
+
+    .modal .button-adicionar {
+        padding: 11px 16px;
+        font-size: 13px;
     }
 
     /* Rodapé */

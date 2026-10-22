@@ -19,6 +19,7 @@ opcoesPagamento.forEach((opcao) => {
 
             document.querySelector("#troco").value = "";
             document.querySelector("#troco-valor").value = "";
+            document.querySelector("#troco").setCustomValidity("");
 
         }
 

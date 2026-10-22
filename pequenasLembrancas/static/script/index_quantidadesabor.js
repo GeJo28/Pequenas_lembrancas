@@ -2,13 +2,13 @@ document.querySelectorAll(".checkbox-sabor").forEach(function(checkbox) {
 
     checkbox.addEventListener("change", function() {
 
-        const label = this.closest("label");
+        const opcao = this.closest(".sabor-opcao");
 
-        const contador = label.querySelector(
+        const contador = opcao.querySelector(
             ".contador-addremove-sabores"
         );
 
-        const quantidade = label.querySelector(
+        const quantidade = opcao.querySelector(
             ".quantidade-sabores"
         );
 
@@ -40,9 +40,9 @@ document.querySelectorAll(".btn-menos").forEach(function(botao) {
 
         event.preventDefault();
 
-        const label = this.closest("label");
+        const opcao = this.closest(".sabor-opcao");
 
-        const quantidade = label.querySelector(
+        const quantidade = opcao.querySelector(
             ".quantidade-sabores"
         );
 
@@ -72,9 +72,9 @@ document.querySelectorAll(".btn-mais").forEach(function(botao) {
 
         event.preventDefault();
 
-        const label = this.closest("label");
+        const opcao = this.closest(".sabor-opcao");
 
-        const quantidade = label.querySelector(
+        const quantidade = opcao.querySelector(
             ".quantidade-sabores"
         );
 

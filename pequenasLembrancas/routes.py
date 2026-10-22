@@ -264,9 +264,10 @@ def montar_mensagem_pedido(carrinho, forma_pagamento, troco, total):
 
     if forma_pagamento == "dinheiro" and troco:
 
+        troco_formatado = f"{float(troco):.2f}".replace(".", ",")
         mensagem += (
             f"Troco para: "
-            f"R$ {float(troco):.2f}\n"
+            f"R$ {troco_formatado}\n"
         )
 
     return mensagem
