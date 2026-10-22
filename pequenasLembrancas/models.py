@@ -1,4 +1,8 @@
 from pequenasLembrancas import database
+from datetime import datetime, timezone
+
+def agora_utc():
+    return datetime.now(timezone.utc).replace(tzinfo=None)
 
 class Produto(database.Model):
     id = database.Column(database.Integer, primary_key=True)
@@ -36,6 +40,7 @@ class ItemCarrinhoSabor(database.Model):
 
 class Entrega(database.Model):
     id = database.Column(database.Integer, primary_key=True)
+    criado_em = database.Column(database.DateTime, nullable=False, default=agora_utc)
     rua_logradouro = database.Column(database.String, nullable=False)
     numero = database.Column(database.Integer, nullable=False)
     complemento = database.Column(database.String)

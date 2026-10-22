@@ -2,8 +2,40 @@ from flask import render_template, url_for, redirect, request, session
 from pequenasLembrancas import app, database
 from pequenasLembrancas.forms import FormEntrega, FormCarrinhoBrigadeiro, FormCarrinhoCoxinha
 from pequenasLembrancas.models import Produto, Sabor, Carrinho, ItemCarrinho, ItemCarrinhoSabor, Entrega
+from datetime import datetime, timedelta, timezone
 import uuid
 from urllib.parse import quote
+
+RETENCAO_ENTREGA = timedelta(hours=24)
+
+@app.before_request
+def limpar_entregas_expiradas():
+    limite = datetime.now(timezone.utc).replace(tzinfo=None) - RETENCAO_ENTREGA
+    ids_expirados = [
+        entrega_id
+        for (entrega_id,) in database.session.query(Entrega.id).filter(
+            Entrega.criado_em < limite
+        ).all()
+    ]
+    if not ids_expirados:
+        return
+
+    database.session.query(Carrinho).filter(
+        Carrinho.entrega_id.in_(ids_expirados)
+    ).update({Carrinho.entrega_id: None}, synchronize_session=False)
+
+    database.session.query(Entrega).filter(
+        Entrega.id.in_(ids_expirados)
+    ).delete(synchronize_session=False)
+
+    database.session.commit()
+
+@app.after_request
+def definir_cabecalhos_privacidade(response):
+    response.headers["Referrer-Policy"] = "no-referrer"
+    if request.endpoint in {"entrega", "pagamento"}:
+        response.headers["Cache-Control"] = "no-store"
+    return response
 
 def obter_usuario_id():
     if "usuario_id" not in session:

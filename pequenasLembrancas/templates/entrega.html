@@ -36,6 +36,27 @@
                         <p>Etapa Obrigatória</p>
 
                         <div class="div-entrega">
+                            <div class="aviso-privacidade">
+                                <div>
+                                    Usaremos seu nome, telefone e endereço para preparar e entregar seu pedido.
+                                    Ao concluir, esses dados serão incluídos na mensagem que será aberta no WhatsApp
+                                    da loja e poderão aparecer na URL, no histórico do navegador ou em registros
+                                    técnicos. O WhatsApp/Meta também poderá tratar essas informações conforme as
+                                    próprias políticas.
+                                    Os dados ficam armazenados temporariamente durante o checkout e são apagados
+                                    quando o link do pedido é gerado. Se o checkout for abandonado, serão removidos
+                                    na próxima interação com o site após 24 horas.
+                                </div>
+                                <label for="consentimento_privacidade">
+                                    {{ form_entrega.consentimento_privacidade }}
+                                    Li e concordo com o uso e o compartilhamento dos meus dados para processar e
+                                    entregar este pedido.
+                                </label>
+                                {% for erro in form_entrega.consentimento_privacidade.errors %}
+                                    <span class="erro-privacidade">{{ erro }}</span>
+                                {% endfor %}
+                            </div>
+
                             <div class="rua">
                                 <label for="rua">Rua/Logradouro<span class="obrigatorio">*</span></label>
                                 {% if form_entrega.rua_logradouro(id="rua").errors %}
