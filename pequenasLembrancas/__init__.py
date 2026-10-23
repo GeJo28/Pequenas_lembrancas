@@ -1,12 +1,29 @@
+import os
+import secrets
+import warnings
+
 from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
+from flask_wtf.csrf import CSRFProtect
 from sqlalchemy import inspect, text
 
 app = Flask(__name__)
 
-app.config['SECRET_KEY'] = 'b38883662ebdc3ee251f7eb9d1566ec0'
+secret_key = os.environ.get("SECRET_KEY")
+if not secret_key:
+    if os.environ.get("APP_ENV") == "production":
+        raise RuntimeError("SECRET_KEY must be configured in production.")
+    secret_key = secrets.token_hex(32)
+    warnings.warn(
+        "SECRET_KEY is not configured; development sessions will reset on restart.",
+        RuntimeWarning,
+        stacklevel=2,
+    )
+
+app.config["SECRET_KEY"] = secret_key
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///plembrancas.db'
 
+csrf = CSRFProtect(app)
 database = SQLAlchemy(app)
 
 from pequenasLembrancas import routes

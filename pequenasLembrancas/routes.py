@@ -33,6 +33,24 @@ def limpar_entregas_expiradas():
 @app.after_request
 def definir_cabecalhos_privacidade(response):
     response.headers["Referrer-Policy"] = "no-referrer"
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["Content-Security-Policy"] = (
+        "default-src 'self'; "
+        "script-src 'self'; "
+        "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; "
+        "font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; "
+        "img-src 'self' data:; "
+        "connect-src 'self'; "
+        "object-src 'none'; "
+        "base-uri 'self'; "
+        "frame-ancestors 'none'; "
+        "form-action 'self' https://wa.me https://api.whatsapp.com https://web.whatsapp.com"
+    )
+    if request.is_secure:
+        response.headers["Strict-Transport-Security"] = (
+            "max-age=31536000; includeSubDomains"
+        )
     if request.endpoint in {"entrega", "pagamento"}:
         response.headers["Cache-Control"] = "no-store"
     return response
@@ -114,7 +132,7 @@ def index():
                            quantidade_carrinho=quantidade_carrinho
                            )
 
-@app.route("/carrinho/remover/<int:item_id>", methods=['GET', 'POST'])
+@app.route("/carrinho/remover/<int:item_id>", methods=['POST'])
 def remover_item_carrinho(item_id):
     usuario_id = obter_usuario_id()
 
@@ -301,7 +319,7 @@ def pagamento():
 
         numero = '5511999996841' 
 
-        link_whatsapp = f"https://wa.me/{numero}?text={quote(mensagem)}" 
+        link_whatsapp = f"https://wa.me/{numero}?text={quote(mensagem, safe='')}"
 
         # 1. Guarda a entrega antes de apagar o carrinho
         entrega = carrinho.entrega
@@ -321,6 +339,6 @@ def pagamento():
         # Apaga o identificador do usuário da sessão
         session.pop('usuario_id', None)
 
-        return redirect(link_whatsapp)     
+        return redirect(link_whatsapp, code=303)
 
     return render_template('pagamento.html', quantidade_carrinho=quantidade_carrinho, total=total, carrinho=carrinho)

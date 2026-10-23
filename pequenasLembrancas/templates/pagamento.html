@@ -122,6 +122,7 @@
                 </article>
 
                 <form action="" method="POST" class="forma-pagamento">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                     <fieldset>
                         <label class="metodo-pagamento">
                             <input type="radio" name="pagamento" value="pix" required>
